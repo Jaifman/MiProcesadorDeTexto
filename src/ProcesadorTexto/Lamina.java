@@ -16,7 +16,7 @@ public class Lamina extends JPanel {
 	public Lamina(){
 		
 		setLayout(new BorderLayout());
-		
+		//Pruebas
 		JPanel laminaMenu = new JPanel();
 		
 		JMenuBar miBarra = new JMenuBar();
