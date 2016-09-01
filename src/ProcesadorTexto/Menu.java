@@ -11,5 +11,6 @@ public class Menu extends JFrame {
 		Lamina miLamina = new Lamina();
 		
 		add(miLamina);
-	}
+		
+		setVisible(true);	}
 }
