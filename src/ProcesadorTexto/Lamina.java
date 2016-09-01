@@ -1,11 +1,15 @@
 package ProcesadorTexto;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
 public class Lamina extends JPanel {
 	
@@ -22,8 +26,35 @@ public class Lamina extends JPanel {
 		JMenu tamano = new JMenu("Tamaño");
 		
 		JMenuItem arial = new JMenuItem("Arial");
+		
+		arial.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				miArea.setFont(new Font("Arial", Font.PLAIN,12));	
+				
+			}
+		});
+		
 		JMenuItem courier = new JMenuItem("Courier");
+		
+		courier.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				miArea.setFont(new Font("Courier", Font.PLAIN,12));	
+				
+			}
+		});
+		
 		JMenuItem verdana = new JMenuItem("Verdana");
+		
+		verdana.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				miArea.setFont(new Font("Verdana", Font.PLAIN,12));	
+				
+			}
+		});
+		
 		
 		fuente.add(arial);
 		fuente.add(courier);
@@ -53,5 +84,11 @@ public class Lamina extends JPanel {
 		
 		add(laminaMenu,BorderLayout.NORTH);
 		
+		miArea = new JTextPane();
+		
+		add(miArea,BorderLayout.CENTER);
+		
 	}
+	
+	JTextPane miArea;
 }
