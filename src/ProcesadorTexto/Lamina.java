@@ -116,4 +116,3 @@ public class Lamina extends JPanel {
 	Font letras;
 	
 }
-//Probando cambio de Email en git
