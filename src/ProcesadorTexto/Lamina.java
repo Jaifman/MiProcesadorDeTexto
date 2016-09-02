@@ -2,93 +2,117 @@ package ProcesadorTexto;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.text.StyledEditorKit;
 
 public class Lamina extends JPanel {
 	
+	//Creamos el constructor de la clase
 	public Lamina(){
 		
+		//Elegimos el estilo de plantilla
 		setLayout(new BorderLayout());
 		
+		//Creamos lamina sobre la que trabajar
 		JPanel laminaMenu = new JPanel();
 		
+		//Creamos barra de menús
 		JMenuBar miBarra = new JMenuBar();
 		
-		JMenu fuente = new JMenu("Fuente");
-		JMenu estilo = new JMenu("Estilo");
-		JMenu tamano = new JMenu("Tamaño");
+		//Creamos 3 cuadros de menú
+		fuente = new JMenu("Fuente");
+		estilo = new JMenu("Estilo");
+		tamano = new JMenu("Tamaño");
 		
-		JMenuItem arial = new JMenuItem("Arial");
+		//Agregamos 3 submenús al menú Fuente
+		configuraMenu("Arial","fuente","Arial",9,10);
+		configuraMenu("Courier","fuente","Courier",9,10);
+		configuraMenu("Verdana","fuente","Verdana",9,10);
 		
-		arial.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				
-				miArea.setFont(new Font("Arial", Font.PLAIN,12));	
-				
-			}
-		});
+		//Agregamos 2 submenús al menu Estilo
+		configuraMenu("Negrita","estilo","",Font.BOLD,1);
+		configuraMenu("Cursiva","estilo","",Font.ITALIC,1);
 		
-		JMenuItem courier = new JMenuItem("Courier");
+		//Agregamos 4 submenús al menú Tamaño
+		configuraMenu("12","tamaño","",9,12);
+		configuraMenu("16","tamaño","",9,16);
+		configuraMenu("20","tamaño","",9,20);
+		configuraMenu("24","tamaño","",9,24);
 		
-		courier.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				
-				miArea.setFont(new Font("Courier", Font.PLAIN,12));	
-				
-			}
-		});
-		
-		JMenuItem verdana = new JMenuItem("Verdana");
-		
-		verdana.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				
-				miArea.setFont(new Font("Verdana", Font.PLAIN,12));	
-				
-			}
-		});
-		
-		
-		fuente.add(arial);
-		fuente.add(courier);
-		fuente.add(verdana);
-		
-		JMenuItem negrita = new JMenuItem("Negrita");
-		JMenuItem cursiva = new JMenuItem("Cursiva");
-		
-		estilo.add(negrita);
-		estilo.add(cursiva);
-		
-		JMenuItem tam12 = new JMenuItem("12");
-		JMenuItem tam16 = new JMenuItem("16");
-		JMenuItem tam20 = new JMenuItem("20");
-		JMenuItem tam24 = new JMenuItem("24");
-		
-		tamano.add(tam12);
-		tamano.add(tam16);
-		tamano.add(tam20);
-		tamano.add(tam24);
-		
+		//Añadimos los menús a la barra de menús
 		miBarra.add(fuente);
 		miBarra.add(estilo);
 		miBarra.add(tamano);
 		
+		//Añadimos la barra de menús a la lámina
 		laminaMenu.add(miBarra);
 		
+		//Añadimos la lámina y la posicionamos
 		add(laminaMenu,BorderLayout.NORTH);
 		
+		//Creamos el área de texto
 		miArea = new JTextPane();
 		
+		//Añadimos el área de texto y la posicionamos
 		add(miArea,BorderLayout.CENTER);
 		
 	}
 	
+	//Creamos método para crear objetos con menos código
+	public void configuraMenu(String texto, String menu, String tipo, int estilos, int tam){
+		
+		JMenuItem elemento = new JMenuItem(texto);
+		
+		if (menu == "fuente"){
+			
+			fuente.add(elemento);
+			
+			if (tipo == "Arial"){
+				
+				elemento.addActionListener(new StyledEditorKit.FontFamilyAction("cambiaLetra", "Arial"));
+				
+			}else if (tipo == "Courier"){
+				
+				elemento.addActionListener(new StyledEditorKit.FontFamilyAction("cambiaLetra", "Courier"));
+				
+			}else if (tipo == "Verdana"){
+				
+				elemento.addActionListener(new StyledEditorKit.FontFamilyAction("cambiaLetra", "Verdana"));
+				
+			}
+			
+		}else if (menu == "estilo"){
+			
+			estilo.add(elemento);
+			
+			if (estilos == Font.BOLD){
+				
+				elemento.addActionListener(new StyledEditorKit.BoldAction());
+			
+			}else if (estilos == Font.ITALIC){
+				
+				elemento.addActionListener(new StyledEditorKit.ItalicAction());
+				
+			}
+			
+		}else if (menu == "tamaño"){
+			
+			tamano.add(elemento);
+			
+			elemento.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", tam));
+			
+		}
+		
+	}
+	
+	//Declaración de variables
 	JTextPane miArea;
+	JMenu fuente, estilo, tamano;
+	Font letras;
+	
 }
