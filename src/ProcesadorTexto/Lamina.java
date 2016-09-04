@@ -3,6 +3,7 @@ package ProcesadorTexto;
 import java.awt.BorderLayout;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,19 +31,19 @@ public class Lamina extends JPanel {
 		tamano = new JMenu("Tamaño");
 		
 		//Agregamos 3 submenús al menú Fuente
-		configuraMenu("Arial","fuente","Arial",9,10);
-		configuraMenu("Courier","fuente","Courier",9,10);
-		configuraMenu("Verdana","fuente","Verdana",9,10);
+		configuraMenu("Arial","fuente","Arial",9,10,"");
+		configuraMenu("Courier","fuente","Courier",9,10,"");
+		configuraMenu("Verdana","fuente","Verdana",9,10,"");
 		
 		//Agregamos 2 submenús al menu Estilo
-		configuraMenu("Negrita","estilo","",Font.BOLD,1);
-		configuraMenu("Cursiva","estilo","",Font.ITALIC,1);
+		configuraMenu("Negrita","estilo","",Font.BOLD,1,"bin/ProcesadorTexto/negrita.png");
+		configuraMenu("Cursiva","estilo","",Font.ITALIC,1,"bin/ProcesadorTexto/cursiva.png");
 		
 		//Agregamos 4 submenús al menú Tamaño
-		configuraMenu("12","tamaño","",9,12);
-		configuraMenu("16","tamaño","",9,16);
-		configuraMenu("20","tamaño","",9,20);
-		configuraMenu("24","tamaño","",9,24);
+		configuraMenu("12","tamaño","",9,12,"");
+		configuraMenu("16","tamaño","",9,16,"");
+		configuraMenu("20","tamaño","",9,20,"");
+		configuraMenu("24","tamaño","",9,24,"");
 		
 		//Añadimos los menús a la barra de menús
 		miBarra.add(fuente);
@@ -64,9 +65,9 @@ public class Lamina extends JPanel {
 	}
 	
 	//Creamos método para crear objetos con menos código
-	public void configuraMenu(String texto, String menu, String tipo, int estilos, int tam){
+	public void configuraMenu(String texto, String menu, String tipo, int estilos, int tam, String ruta){
 		
-		JMenuItem elemento = new JMenuItem(texto);
+		JMenuItem elemento = new JMenuItem(texto, new ImageIcon(ruta));
 		
 		if (menu == "fuente"){
 			
