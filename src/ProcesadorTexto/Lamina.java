@@ -3,11 +3,14 @@ package ProcesadorTexto;
 import java.awt.BorderLayout;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextPane;
 import javax.swing.text.StyledEditorKit;
 
@@ -35,15 +38,43 @@ public class Lamina extends JPanel {
 		configuraMenu("Courier","fuente","Courier",9,10,"");
 		configuraMenu("Verdana","fuente","Verdana",9,10,"");
 		
-		//Agregamos 2 submenús al menu Estilo
-		configuraMenu("Negrita","estilo","",Font.BOLD,1,"bin/ProcesadorTexto/negrita.png");
-		configuraMenu("Cursiva","estilo","",Font.ITALIC,1,"bin/ProcesadorTexto/cursiva.png");
+		//Agregamos 2 submenús al menu Estilo (Con CheckBoxes)
+				
+		JCheckBoxMenuItem negrita = new JCheckBoxMenuItem("Negrita", new ImageIcon("bin/ProcesadorTexto/negrita.png"));
+		JCheckBoxMenuItem cursiva = new JCheckBoxMenuItem("Cursiva", new ImageIcon("bin/ProcesadorTexto/cursiva.png"));
 		
-		//Agregamos 4 submenús al menú Tamaño
-		configuraMenu("12","tamaño","",9,12,"");
-		configuraMenu("16","tamaño","",9,16,"");
-		configuraMenu("20","tamaño","",9,20,"");
-		configuraMenu("24","tamaño","",9,24,"");
+		negrita.addActionListener(new StyledEditorKit.BoldAction());
+		cursiva.addActionListener(new StyledEditorKit.ItalicAction());
+		
+		estilo.add(negrita);
+		estilo.add(cursiva);
+		
+		//Creamos ButtonGroup para que solo sea seleccionable una opción
+		ButtonGroup tamanoLetra = new ButtonGroup();
+		
+		//Creamos los RadioButtons con las opciones que tendremos
+		JRadioButtonMenuItem doce = new JRadioButtonMenuItem("12");
+		JRadioButtonMenuItem dieciseis = new JRadioButtonMenuItem("16");
+		JRadioButtonMenuItem veinte = new JRadioButtonMenuItem("20");
+		JRadioButtonMenuItem veinticuatro = new JRadioButtonMenuItem("24");
+		
+		//Añadimos los botones al ButtonGroup
+		tamanoLetra.add(doce);
+		tamanoLetra.add(dieciseis);
+		tamanoLetra.add(veinte);
+		tamanoLetra.add(veinticuatro);
+		
+		//Le damos funcionalidad a los botones
+		doce.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 12));
+		dieciseis.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 16));
+		veinte.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 20));
+		veinticuatro.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", 24));
+		
+		//Añadimos los botones al menú
+		tamano.add(doce);
+		tamano.add(dieciseis);
+		tamano.add(veinte);
+		tamano.add(veinticuatro);
 		
 		//Añadimos los menús a la barra de menús
 		miBarra.add(fuente);
@@ -84,20 +115,6 @@ public class Lamina extends JPanel {
 			}else if (tipo == "Verdana"){
 				
 				elemento.addActionListener(new StyledEditorKit.FontFamilyAction("cambiaLetra", "Verdana"));
-				
-			}
-			
-		}else if (menu == "estilo"){
-			
-			estilo.add(elemento);
-			
-			if (estilos == Font.BOLD){
-				
-				elemento.addActionListener(new StyledEditorKit.BoldAction());
-			
-			}else if (estilos == Font.ITALIC){
-				
-				elemento.addActionListener(new StyledEditorKit.ItalicAction());
 				
 			}
 			
