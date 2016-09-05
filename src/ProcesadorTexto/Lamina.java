@@ -2,6 +2,7 @@ package ProcesadorTexto;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.InputEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -10,9 +11,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.text.StyledEditorKit;
+
+import com.sun.glass.events.KeyEvent;
 
 public class Lamina extends JPanel {
 	
@@ -46,6 +51,9 @@ public class Lamina extends JPanel {
 		negrita.addActionListener(new StyledEditorKit.BoldAction());
 		cursiva.addActionListener(new StyledEditorKit.ItalicAction());
 		
+		negrita.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));
+		cursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,InputEvent.CTRL_DOWN_MASK));
+		
 		estilo.add(negrita);
 		estilo.add(cursiva);
 		
@@ -57,7 +65,7 @@ public class Lamina extends JPanel {
 		JRadioButtonMenuItem dieciseis = new JRadioButtonMenuItem("16");
 		JRadioButtonMenuItem veinte = new JRadioButtonMenuItem("20");
 		JRadioButtonMenuItem veinticuatro = new JRadioButtonMenuItem("24");
-		
+				
 		//Añadimos los botones al ButtonGroup
 		tamanoLetra.add(doce);
 		tamanoLetra.add(dieciseis);
