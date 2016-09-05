@@ -118,12 +118,6 @@ public class Lamina extends JPanel {
 				
 			}
 			
-		}else if (menu == "tamaño"){
-			
-			tamano.add(elemento);
-			
-			elemento.addActionListener(new StyledEditorKit.FontSizeAction("cambiaTamaño", tam));
-			
 		}
 		
 	}
