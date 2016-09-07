@@ -6,7 +6,7 @@ public class Menu extends JFrame {
 	
 	public Menu(){
 		
-		setBounds(500,300,550,400);
+		setBounds(325,100,550,550);
 		
 		Lamina miLamina = new Lamina();
 		
