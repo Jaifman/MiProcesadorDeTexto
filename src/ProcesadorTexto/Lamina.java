@@ -1,25 +1,10 @@
 package ProcesadorTexto;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.InputEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JTextPane;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
-import javax.swing.text.StyledEditorKit;
-
-import com.sun.glass.events.KeyEvent;
+import javax.swing.*;
+import javax.swing.text.*;
 
 public class Lamina extends JPanel {
 	
@@ -108,49 +93,40 @@ public class Lamina extends JPanel {
 		add(miArea,BorderLayout.CENTER);
 		
 		//Creamos Barra de Herramientas
-		JToolBar barra = new JToolBar();
+		barra = new JToolBar();
 		
-		//Creamos 3 botones para la Barra de Herramientas
-		JButton negritaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/negrita.png"));
-		JButton cursivaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/cursiva.png"));
-		JButton subrayarBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/subrayar.png"));
-		JButton azulBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/azul.png"));
-		JButton amarilloBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/amarillo.png"));
-		JButton rojoBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/rojo.png"));
-		JButton aliIzquierda = new JButton(new ImageIcon("bin/ProcesadorTexto/izquierda.png"));
-		JButton aliCentro = new JButton(new ImageIcon("bin/ProcesadorTexto/centrado.png"));
-		JButton aliDerecha = new JButton(new ImageIcon("bin/ProcesadorTexto/derecha.png"));
-		JButton aliJustificado = new JButton(new ImageIcon("bin/ProcesadorTexto/justificado.png"));
+		//Añadimos elementos a la barra con el método creado
+		configuraBarra("bin/ProcesadorTexto/negrita.png").addActionListener(new StyledEditorKit.BoldAction());
+		configuraBarra("bin/ProcesadorTexto/cursiva.png").addActionListener(new StyledEditorKit.ItalicAction());
+		configuraBarra("bin/ProcesadorTexto/subrayar.png").addActionListener(new StyledEditorKit.UnderlineAction());
 		
-		//Damos funcionalidad a los botones
-		negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
-		cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
-		subrayarBarra.addActionListener(new StyledEditorKit.UnderlineAction());
-		azulBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Azul",Color.BLUE));
-		amarilloBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Amarilla",Color.YELLOW));
-		rojoBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Roja",Color.RED));
-		aliIzquierda.addActionListener(new StyledEditorKit.AlignmentAction("Izquierda",0));
-		aliCentro.addActionListener(new StyledEditorKit.AlignmentAction("Centrado",1));
-		aliDerecha.addActionListener(new StyledEditorKit.AlignmentAction("Derecha",2));
-		aliJustificado.addActionListener(new StyledEditorKit.AlignmentAction("Justificado",3));
+		barra.addSeparator();
 		
-		//Añadimos los botones a la barra
-		barra.add(negritaBarra);
-		barra.add(cursivaBarra);
-		barra.add(subrayarBarra);
-		barra.add(azulBarra);
-		barra.add(amarilloBarra);
-		barra.add(rojoBarra);
-		barra.add(aliIzquierda);
-		barra.add(aliCentro);
-		barra.add(aliDerecha);
-		barra.add(aliJustificado);
+		configuraBarra("bin/ProcesadorTexto/azul.png").addActionListener(new StyledEditorKit.ForegroundAction("Fuente Azul",Color.BLUE));
+		configuraBarra("bin/ProcesadorTexto/amarillo.png").addActionListener(new StyledEditorKit.ForegroundAction("Fuente Amarilla",Color.YELLOW));
+		configuraBarra("bin/ProcesadorTexto/rojo.png").addActionListener(new StyledEditorKit.ForegroundAction("Fuente Roja",Color.RED));
+		
+		barra.addSeparator();
+		
+		configuraBarra("bin/ProcesadorTexto/izquierda.png").addActionListener(new StyledEditorKit.AlignmentAction("Izquierda",0));
+		configuraBarra("bin/ProcesadorTexto/centrado.png").addActionListener(new StyledEditorKit.AlignmentAction("Centrado",1));
+		configuraBarra("bin/ProcesadorTexto/derecha.png").addActionListener(new StyledEditorKit.AlignmentAction("Derecha",2));
+		configuraBarra("bin/ProcesadorTexto/justificado.png").addActionListener(new StyledEditorKit.AlignmentAction("Justificado",3));
 		
 		//Determinamos orientación de la barra
 		barra.setOrientation(1);
 		
 		//Añadimos la barra a la lámina y la situamos a la izquierda
 		add(barra,BorderLayout.WEST);
+	}
+	
+	//Creamos método para crear botones y añadirlos a la barra y simplificar código
+	public JButton configuraBarra(String ruta){
+		
+		JButton boton = new JButton (new ImageIcon(ruta));
+		barra.add(boton);
+		
+		return boton;
 	}
 	
 	//Creamos método para crear objetos con menos código
@@ -184,5 +160,8 @@ public class Lamina extends JPanel {
 	JTextPane miArea;
 	JMenu fuente, estilo, tamano;
 	Font letras;
+	JButton negritaBarra, cursivaBarra, subrayarBarra, azulBarra,amarilloBarra, 
+	rojoBarra, aliIzquierda, aliCentrado, aliDerecha, aliJustificado;
+	JToolBar barra;
 	
 }
