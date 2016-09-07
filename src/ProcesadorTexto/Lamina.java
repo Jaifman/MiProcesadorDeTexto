@@ -1,6 +1,7 @@
 package ProcesadorTexto;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.InputEvent;
 
@@ -56,7 +57,7 @@ public class Lamina extends JPanel {
 		
 		negrita.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));
 		cursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,InputEvent.CTRL_DOWN_MASK));
-		cursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));
+		subrayar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));
 		
 		estilo.add(negrita);
 		estilo.add(cursiva);
@@ -113,16 +114,37 @@ public class Lamina extends JPanel {
 		JButton negritaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/negrita.png"));
 		JButton cursivaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/cursiva.png"));
 		JButton subrayarBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/subrayar.png"));
+		JButton azulBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/azul.png"));
+		JButton amarilloBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/amarillo.png"));
+		JButton rojoBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/rojo.png"));
+		JButton aliIzquierda = new JButton(new ImageIcon("bin/ProcesadorTexto/izquierda.png"));
+		JButton aliCentro = new JButton(new ImageIcon("bin/ProcesadorTexto/centrado.png"));
+		JButton aliDerecha = new JButton(new ImageIcon("bin/ProcesadorTexto/derecha.png"));
+		JButton aliJustificado = new JButton(new ImageIcon("bin/ProcesadorTexto/justificado.png"));
 		
 		//Damos funcionalidad a los botones
 		negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
 		cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
 		subrayarBarra.addActionListener(new StyledEditorKit.UnderlineAction());
+		azulBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Azul",Color.BLUE));
+		amarilloBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Amarilla",Color.YELLOW));
+		rojoBarra.addActionListener(new StyledEditorKit.ForegroundAction("Fuente Roja",Color.RED));
+		aliIzquierda.addActionListener(new StyledEditorKit.AlignmentAction("Izquierda",0));
+		aliCentro.addActionListener(new StyledEditorKit.AlignmentAction("Centrado",1));
+		aliDerecha.addActionListener(new StyledEditorKit.AlignmentAction("Derecha",2));
+		aliJustificado.addActionListener(new StyledEditorKit.AlignmentAction("Justificado",3));
 		
 		//Añadimos los botones a la barra
 		barra.add(negritaBarra);
 		barra.add(cursivaBarra);
 		barra.add(subrayarBarra);
+		barra.add(azulBarra);
+		barra.add(amarilloBarra);
+		barra.add(rojoBarra);
+		barra.add(aliIzquierda);
+		barra.add(aliCentro);
+		barra.add(aliDerecha);
+		barra.add(aliJustificado);
 		
 		//Determinamos orientación de la barra
 		barra.setOrientation(1);
