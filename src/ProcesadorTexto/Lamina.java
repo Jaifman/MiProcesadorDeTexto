@@ -6,14 +6,15 @@ import java.awt.event.InputEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextPane;
+import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.text.StyledEditorKit;
 
@@ -47,15 +48,19 @@ public class Lamina extends JPanel {
 				
 		JCheckBoxMenuItem negrita = new JCheckBoxMenuItem("Negrita", new ImageIcon("bin/ProcesadorTexto/negrita.png"));
 		JCheckBoxMenuItem cursiva = new JCheckBoxMenuItem("Cursiva", new ImageIcon("bin/ProcesadorTexto/cursiva.png"));
+		JCheckBoxMenuItem subrayar = new JCheckBoxMenuItem("Subrayar", new ImageIcon("bin/ProcesadorTexto/subrayar.png"));
 		
 		negrita.addActionListener(new StyledEditorKit.BoldAction());
 		cursiva.addActionListener(new StyledEditorKit.ItalicAction());
+		subrayar.addActionListener(new StyledEditorKit.UnderlineAction());
 		
 		negrita.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));
 		cursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K,InputEvent.CTRL_DOWN_MASK));
+		cursiva.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));
 		
 		estilo.add(negrita);
 		estilo.add(cursiva);
+		estilo.add(subrayar);
 		
 		//Creamos ButtonGroup para que solo sea seleccionable una opción
 		ButtonGroup tamanoLetra = new ButtonGroup();
@@ -101,6 +106,29 @@ public class Lamina extends JPanel {
 		//Añadimos el área de texto y la posicionamos
 		add(miArea,BorderLayout.CENTER);
 		
+		//Creamos Barra de Herramientas
+		JToolBar barra = new JToolBar();
+		
+		//Creamos 3 botones para la Barra de Herramientas
+		JButton negritaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/negrita.png"));
+		JButton cursivaBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/cursiva.png"));
+		JButton subrayarBarra = new JButton(new ImageIcon("bin/ProcesadorTexto/subrayar.png"));
+		
+		//Damos funcionalidad a los botones
+		negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
+		cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
+		subrayarBarra.addActionListener(new StyledEditorKit.UnderlineAction());
+		
+		//Añadimos los botones a la barra
+		barra.add(negritaBarra);
+		barra.add(cursivaBarra);
+		barra.add(subrayarBarra);
+		
+		//Determinamos orientación de la barra
+		barra.setOrientation(1);
+		
+		//Añadimos la barra a la lámina y la situamos a la izquierda
+		add(barra,BorderLayout.WEST);
 	}
 	
 	//Creamos método para crear objetos con menos código
